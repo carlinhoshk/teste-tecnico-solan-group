@@ -64,4 +64,5 @@ Validação em camadas: ApiClient trata erros HTTP e formato, Service valida cam
 Índices em sn em cada tabela para consultas por serial number.
 
 ![alt text](assets/fotos/snmodel.png)
+
 ![alt text](assets/fotos/sn.png)
