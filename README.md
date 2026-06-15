@@ -46,17 +46,22 @@ java -jar target/iot-data-consumer-0.0.1-SNAPSHOT.jar
 ### Decisões Técnicas
 
 Java + Spring Boot pela maturidade em tarefas agendadas (@Scheduled) e integração com JPA/Hibernate para persistência em SQLite.
+
 ![alt text](assets/fotos/scheduler.png)
 
 Três tabelas separadas uma por equipamento (inversor, rele_protecao, estacao_solarimetrica) porque cada dispositivo tem campos completamente distintos. Uma tabela genérica geraria ~70% de colunas nulas.
+
 ![alt text](<assets/fotos/Pasted image 20260615174140.png>)
 
 Campos como Object nos DTOs porque a API injeta ~20% de anomalias: tipos errados, booleanos, arrays, null. Com Object, a desserialização nunca quebra a validação real acontece no Service, que converte com segurança para Double/Integer.
+
 ![alt text](<assets/fotos/Pasted image 20260615174140.png>)
 
 Validação em camadas: ApiClient trata erros HTTP e formato, Service valida campos essenciais e detecta anomalias (zeros, tipos inválidos, dados faltantes). Cada endpoint é isolado se um falha, os outros continuam.
+
 ![alt text](<assets/fotos/Pasted image 20260615174226.png>)
 
 Índices em sn em cada tabela para consultas por serial number.
+
 ![alt text](assets/fotos/snmodel.png)
 ![alt text](assets/fotos/sn.png)
